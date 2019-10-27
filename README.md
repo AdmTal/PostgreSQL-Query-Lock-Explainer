@@ -22,7 +22,7 @@ source ./venv/bin/activate
   --password DB_PASSWORD \
   --database DATABASE \
   --host HOST \
-  --query "DROP table ACTOR CASCADE"
+  --query "DROP table actor CASCADE"
   
 +-------------+----------------------------+---------------------+
 | Relation ID | Relation Name              | Lock Type           |
