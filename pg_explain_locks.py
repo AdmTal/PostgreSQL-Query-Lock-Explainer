@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+
 import argparse
+import os
+import sys
 
 import psycopg2
 from prettytable import PrettyTable
@@ -18,8 +22,10 @@ RELATION_ID = 'Relation ID'
 RELATION_NAME = 'Relation Name'
 LOCK_TYPE = 'Lock Type'
 
+SETTINGS_FILE = f"{os.path.expanduser('~')}/.pg_explain_locks_settings"
 
-def main(
+
+def explain_locks_for_query(
         user: str,
         password: str,
         host: str,
@@ -72,7 +78,7 @@ def main(
     print(results_table)
 
 
-if __name__ == '__main__':
+def parse_args_from_command_line():
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -111,13 +117,38 @@ if __name__ == '__main__':
         help='Database for database connection',
     )
 
-    args = parser.parse_args()
+    return vars(parser.parse_args())
 
-    main(
-        args.user,
-        args.password,
-        args.host,
-        args.port,
-        args.database,
-        args.query,
-    )
+
+def parse_args_from_settings_file():
+    if len(sys.argv) != 2:
+        print('Error : need to provide query as only arugment')
+        print('Example: pg_explain_locks "SELECT * FROM actors"')
+        exit()
+
+    args = {}
+    with open(SETTINGS_FILE, 'r') as settings_file:
+        content = settings_file.read()
+        lines = content.split('\n')
+        for line in lines:
+            setting, value = line.split('=')
+            args[setting.lower()] = value
+
+    args['query'] = sys.argv[1]
+
+    return args
+
+
+def main():
+    if os.path.exists(SETTINGS_FILE):
+        args = parse_args_from_settings_file()
+    else:
+        args = parse_args_from_command_line()
+
+    if 'commit' in args['query'].lower():
+        print(
+            'Just to be super safe, this tool will not work for queries that '
+            'include the word commit :)'
+        )
+
+    explain_locks_for_query(**args)

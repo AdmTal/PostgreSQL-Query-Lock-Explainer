@@ -1,4 +1,8 @@
 .idea/*
 venv/*
 example.txt
+.settings
+build/*
+dist/*
+pg_explain_locks.egg-info/*
 

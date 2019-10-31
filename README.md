@@ -7,17 +7,15 @@ Query is executed but not committed.
 ## Installation instructions
 
 ```.env
-python3 -m venv venv
-source ./venv/bin/activate
-(venv) pip install requirements.txt
+pip install pg_explain_locks
 ```
 
 ## Example Usage
 
 Examples shown against [dvdrental sample database](http://www.postgresqltutorial.com/postgresql-sample-database/)
-```
-source ./venv/bin/activate
-(venv) python explain_query_locks.py \
+
+```.env
+pg_explain_locks \
   --user DB_USER \
   --password DB_PASSWORD \
   --database DATABASE \
@@ -39,7 +37,7 @@ source ./venv/bin/activate
 ```
 
 ```.env
-(venv) python explain_query_locks.py \
+pg_explain_locks \
   --user DB_USER \
   --password DB_PASSWORD \
   --database DATABASE \
@@ -61,7 +59,7 @@ source ./venv/bin/activate
 
 ```.env
 
-(venv) python explain_query_locks.py \
+pg_explain_locks \
   --user DB_USER \
   --password DB_PASSWORD \
   --database DATABASE \
@@ -74,4 +72,24 @@ source ./venv/bin/activate
 | 16411       | customer      | AccessExclusiveLock |
 +-------------+---------------+---------------------+
 ```
+
+## Example Usage with settings file
+
+Create a settings file at `~.pg_explain_locks_settings` in order to use the same DB settings every time.
+
+Settings file contents :
+```.env
+USER=your_user
+PASSWORD=your_password
+DATABASE=your_database
+HOST=your_host
+PORT=your_post
+```
+
+Usage:
+
+```.env
+pg_explain_locks "SELECT * FROM actors"
+```
+
 
