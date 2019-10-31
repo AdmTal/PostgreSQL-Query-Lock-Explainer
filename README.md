@@ -89,7 +89,13 @@ PORT=your_post
 Usage:
 
 ```.env
-pg_explain_locks "SELECT * FROM actors"
+pg_explain_locks "ALTER TABLE customer ADD COLUMN deleted BOOLEAN"
+
++-------------+---------------+---------------------+
+| Relation ID | Relation Name | Lock Type           |
++-------------+---------------+---------------------+
+| 16411       | customer      | AccessExclusiveLock |
++-------------+---------------+---------------------+
 ```
 
 

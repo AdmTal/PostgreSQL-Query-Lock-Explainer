@@ -150,5 +150,6 @@ def main():
             'Just to be super safe, this tool will not work for queries that '
             'include the word commit :)'
         )
+        exit()
 
     explain_locks_for_query(**args)
