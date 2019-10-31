@@ -73,9 +73,9 @@ pg_explain_locks \
 +-------------+---------------+---------------------+
 ```
 
-## Example Usage with settings file
+## Example usage with settings file
 
-Create a settings file at `~.pg_explain_locks_settings` in order to use the same DB settings every time.
+Create a settings file at `~/.pg_explain_locks_settings` in order to use the same DB settings every time.
 
 Settings file contents :
 ```.env

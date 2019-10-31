@@ -10,7 +10,7 @@ requirements = [
 
 setuptools.setup(
     name="pg_explain_locks",  # Replace with your own username
-    version="0.0.2",
+    version="0.0.3",
     author="Adam Tal",
     author_email="admtal@gmail.com",
     description="Postgres utility to show what locks will be acquired by a given query.",
