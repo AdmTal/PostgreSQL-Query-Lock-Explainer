@@ -4,11 +4,27 @@ Utility to show what locks will be acquired by a given query.
 
 Query is executed but not committed.
 
+> **Warning**
+> 
+> Don't run this on a production DB.
+> 
+> The suggested strategy is to run this using a test DB to figure out the locks
+> And then use that information later if you need it.
+
 ## Installation instructions
 
 ```.env
 pip install pg_explain_locks
 ```
+
+## How this thing works
+
+This tool runs a given query like this:
+
+1. `BEGIN`
+2. `-- Run given query`
+3. `-- Check which locks are taken`
+4. `ROLLBACK`
 
 ## Example Usage
 
