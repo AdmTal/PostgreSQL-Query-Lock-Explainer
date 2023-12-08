@@ -129,7 +129,7 @@ def parse_args_from_settings_file():
     args = {}
     with open(SETTINGS_FILE, 'r') as settings_file:
         content = settings_file.read()
-        lines = content.trim().split('\n')
+        lines = content.strip().split('\n')
         for line in lines:
             setting, value = line.split('=')
             args[setting.lower()] = value
